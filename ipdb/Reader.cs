@@ -68,7 +68,11 @@ namespace ipdb
 
         public string[] find(string addr, string language)
         {
-
+            return find(addr, language, out _);
+        }
+        public string[] find(string addr, string language, out IpRange range)
+        {
+            range = null;
             int off;
             try
             {
@@ -122,7 +126,8 @@ namespace ipdb
             int node;
             try
             {
-                node = findNode(ipv);
+                node = findNode(ipv, out var prefix, out var bits);
+                range = CalcIpRange(bits, prefix);
             }
             catch (NotFoundException)
             {
@@ -134,8 +139,23 @@ namespace ipdb
             Array.Copy(data.Split('\t'), off, dst, 0, meta.Fields.Length);
             return dst;
         }
+        public class IpRange
+        {
+            public int Low { set; get; }
+            public int High { set; get; }
+            public IPAddress LowIpAddress => new IPAddress(BitConverter.GetBytes(IPAddress.HostToNetworkOrder(Low)));
+            public IPAddress HighIpAddress => new IPAddress(BitConverter.GetBytes(IPAddress.HostToNetworkOrder(High)));
+        }
 
-        private int findNode(byte[] binary)
+        public static IpRange CalcIpRange(int bits, int prefix)
+        {
+            var shift = 32 - prefix;
+            var low = bits << shift;
+            var high = ((bits + 1) << shift) - 1;
+            return new IpRange { Low = low, High = high };
+        }
+
+        private int findNode(byte[] binary, out int prefix, out int bits)
         {
 
             var node = 0;
@@ -146,17 +166,18 @@ namespace ipdb
             {
                 node = v4offset;
             }
-
-            for (var i = 0; i < bit; i++)
+            bits = 0;
+            for (prefix = 0; prefix < bit; ++prefix)
             {
                 if (node > nodeCount)
                 {
                     break;
                 }
 
-                node = readNode(node, 1 & ((0xFF & binary[i / 8]) >> 7 - (i % 8)));
+                var b = 1 & ((0xFF & binary[prefix / 8]) >> 7 - (prefix % 8));
+                bits = (bits << 1) + b;
+                node = readNode(node, b);
             }
-
             if (node > nodeCount)
             {
                 return node;

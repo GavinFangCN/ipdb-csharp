@@ -18,7 +18,10 @@ namespace ipdb
         public string[] find(string addr, string language)  {
             return reader.find(addr, language);
         }
-
+        public string[] find(string addr, string language, out Reader.IpRange range)
+        {
+            return reader.find(addr, language, out range);
+        }
         public Dictionary<string, string> findMap(string addr, string language)  {
             var data = reader.find(addr, language);
             if (data == null) {
@@ -33,9 +36,14 @@ namespace ipdb
             return m;
         }
 
-        public CityInfo findInfo(string addr, string language)  {
+        public CityInfo findInfo(string addr, string language)
+        {
+            return findInfo(addr, language, out _);
+        }
 
-            var data = reader.find(addr, language);
+        public CityInfo findInfo(string addr, string language, out Reader.IpRange range)  {
+
+            var data = reader.find(addr, language, out range);
             if (data == null) {
                 return null;
             }
