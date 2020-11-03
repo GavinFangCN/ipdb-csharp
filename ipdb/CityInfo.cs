@@ -2,10 +2,8 @@
 
 namespace ipdb
 {
-
     public class CityInfo
     {
-
         private readonly string[] data;
 
         public CityInfo(string[] data)
@@ -13,109 +11,51 @@ namespace ipdb
             this.data = data;
         }
 
-        public string GetCountryName()
-        {
-            return data[0];
-        }
+        public string GetCountryName() => GetValueSafe(0);
 
-        public string GetRegionName()
-        {
-            return data[1];
-        }
+        public string GetRegionName() => GetValueSafe(1);
 
-        public string GetCityName()
-        {
-            return data[2];
-        }
+        public string GetCityName() => GetValueSafe(2);
 
-        public string GetOwnerDomain()
-        {
-            return data[3];
-        }
+        public string OwnerDomain => GetValueSafe(3);
 
-        public string GetIspDomain()
-        {
-            return data[4];
-        }
+        public string IspDomain => GetValueSafe(4);
 
-        public string GetLatitude()
-        {
-            return data[5];
-        }
+        public string GetLatitude() => GetValueSafe(5);
 
-        public string GetLongitude()
-        {
-            return data[6];
-        }
+        public string GetLongitude() => GetValueSafe(6);
 
-        public string GetTimezone()
-        {
-            return data[7];
-        }
+        public string GetTimezone() => GetValueSafe(7);
 
-        public string GetUtcOffset()
-        {
-            return data[8];
-        }
+        public string GetUtcOffset() => GetValueSafe(8);
 
-        public string GetChinaAdminCode()
-        {
-            return data[9];
-        }
+        public string GetChinaAdminCode() => GetValueSafe(9);
 
-        public string GetIddCode()
-        {
-            return data[10];
-        }
+        public string GetIddCode() => GetValueSafe(10);
 
-        public string GetCountryCode()
-        {
-            return data[11];
-        }
+        public string GetCountryCode() => GetValueSafe(11);
 
-        public string GetContinentCode()
-        {
-            return data[12];
-        }
+        public string GetContinentCode() => GetValueSafe(12);
 
-        public string GetIDC()
-        {
-            return data[13];
-        }
+        public string GetIDC() => GetValueSafe(13);
 
-        public string GetBaseStation()
-        {
-            return data[14];
-        }
+        public string GetBaseStation() => GetValueSafe(14);
 
-        public string GetCountryCode3()
-        {
-            return data[15];
-        }
+        public string GetCountryCode3() => GetValueSafe(15);
 
-        public string GetEuropeanUnion()
-        {
-            return data[16];
-        }
+        public string GetEuropeanUnion() => GetValueSafe(16);
 
-        public string GetCurrencyCode()
-        {
-            return data[17];
-        }
+        public string GetCurrencyCode() => GetValueSafe(17);
 
-        public string GetCurrencyName()
-        {
-            return data[18];
-        }
+        public string GetCurrencyName() => GetValueSafe(18);
 
-        public string GetAnycast()
-        {
-            return data[19];
-        }
+        public string GetAnycast() => GetValueSafe(19);
+
+        private string GetValueSafe(int index)
+            => data?.Length > index ? data[index] : string.Empty;
 
         public override string ToString()
         {
-
             var sb = new StringBuilder();
 
             sb.Append("country_name:");
@@ -128,10 +68,10 @@ namespace ipdb
             sb.Append(GetCityName());
             sb.Append("\n");
             sb.Append("owner_domain:");
-            sb.Append(GetOwnerDomain());
+            sb.Append(OwnerDomain);
             sb.Append("\n");
             sb.Append("isp_domain:");
-            sb.Append(GetIspDomain());
+            sb.Append(IspDomain);
             sb.Append("\n");
             sb.Append("latitude:");
             sb.Append(GetLatitude());
@@ -192,8 +132,6 @@ namespace ipdb
             sb.Append(GetAnycast());
 
             return sb.ToString();
-
         }
     }
-
 }
