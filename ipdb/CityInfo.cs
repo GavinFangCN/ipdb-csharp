@@ -13,102 +13,102 @@ namespace ipdb
             this.data = data;
         }
 
-        public string getCountryName()
+        public string GetCountryName()
         {
             return data[0];
         }
 
-        public string getRegionName()
+        public string GetRegionName()
         {
             return data[1];
         }
 
-        public string getCityName()
+        public string GetCityName()
         {
             return data[2];
         }
 
-        public string getOwnerDomain()
+        public string GetOwnerDomain()
         {
             return data[3];
         }
 
-        public string getIspDomain()
+        public string GetIspDomain()
         {
             return data[4];
         }
 
-        public string getLatitude()
+        public string GetLatitude()
         {
             return data[5];
         }
 
-        public string getLongitude()
+        public string GetLongitude()
         {
             return data[6];
         }
 
-        public string getTimezone()
+        public string GetTimezone()
         {
             return data[7];
         }
 
-        public string getUtcOffset()
+        public string GetUtcOffset()
         {
             return data[8];
         }
 
-        public string getChinaAdminCode()
+        public string GetChinaAdminCode()
         {
             return data[9];
         }
 
-        public string getIddCode()
+        public string GetIddCode()
         {
             return data[10];
         }
 
-        public string getCountryCode()
+        public string GetCountryCode()
         {
             return data[11];
         }
 
-        public string getContinentCode()
+        public string GetContinentCode()
         {
             return data[12];
         }
 
-        public string getIDC()
+        public string GetIDC()
         {
             return data[13];
         }
 
-        public string getBaseStation()
+        public string GetBaseStation()
         {
             return data[14];
         }
 
-        public string getCountryCode3()
+        public string GetCountryCode3()
         {
             return data[15];
         }
 
-        public string getEuropeanUnion()
+        public string GetEuropeanUnion()
         {
             return data[16];
         }
 
-        public string getCurrencyCode()
+        public string GetCurrencyCode()
         {
             return data[17];
         }
 
-        public string getCurrencyName()
+        public string GetCurrencyName()
         {
             return data[18];
         }
 
-        public string getAnycast()
+        public string GetAnycast()
         {
             return data[19];
         }
@@ -119,77 +119,77 @@ namespace ipdb
             var sb = new StringBuilder();
 
             sb.Append("country_name:");
-            sb.Append(getCountryName());
+            sb.Append(GetCountryName());
             sb.Append("\n");
             sb.Append("region_name:");
-            sb.Append(getRegionName());
+            sb.Append(GetRegionName());
             sb.Append("\n");
             sb.Append("city_name:");
-            sb.Append(getCityName());
+            sb.Append(GetCityName());
             sb.Append("\n");
             sb.Append("owner_domain:");
-            sb.Append(getOwnerDomain());
+            sb.Append(GetOwnerDomain());
             sb.Append("\n");
             sb.Append("isp_domain:");
-            sb.Append(getIspDomain());
+            sb.Append(GetIspDomain());
             sb.Append("\n");
             sb.Append("latitude:");
-            sb.Append(getLatitude());
+            sb.Append(GetLatitude());
             sb.Append("\n");
             sb.Append("longitude:");
-            sb.Append(getLongitude());
+            sb.Append(GetLongitude());
             sb.Append("\n");
 
             sb.Append("timezone:");
-            sb.Append(getTimezone());
+            sb.Append(GetTimezone());
             sb.Append("\n");
 
             sb.Append("utc_offset:");
-            sb.Append(getUtcOffset());
+            sb.Append(GetUtcOffset());
             sb.Append("\n");
 
             sb.Append("china_admin_code:");
-            sb.Append(getChinaAdminCode());
+            sb.Append(GetChinaAdminCode());
             sb.Append("\n");
 
             sb.Append("idd_code:");
-            sb.Append(getIddCode());
+            sb.Append(GetIddCode());
             sb.Append("\n");
 
             sb.Append("country_code:");
-            sb.Append(getCountryCode());
+            sb.Append(GetCountryCode());
             sb.Append("\n");
 
             sb.Append("continent_code:");
-            sb.Append(getContinentCode());
+            sb.Append(GetContinentCode());
             sb.Append("\n");
 
             sb.Append("idc:");
-            sb.Append(getIDC());
+            sb.Append(GetIDC());
             sb.Append("\n");
 
             sb.Append("base_station:");
-            sb.Append(getBaseStation());
+            sb.Append(GetBaseStation());
             sb.Append("\n");
 
             sb.Append("country_code3:");
-            sb.Append(getCountryCode3());
+            sb.Append(GetCountryCode3());
             sb.Append("\n");
 
             sb.Append("european_union:");
-            sb.Append(getEuropeanUnion());
+            sb.Append(GetEuropeanUnion());
             sb.Append("\n");
 
             sb.Append("currency_code:");
-            sb.Append(getCurrencyCode());
+            sb.Append(GetCurrencyCode());
             sb.Append("\n");
 
             sb.Append("currency_name:");
-            sb.Append(getCurrencyName());
+            sb.Append(GetCurrencyName());
             sb.Append("\n");
 
             sb.Append("anycast:");
-            sb.Append(getAnycast());
+            sb.Append(GetAnycast());
 
             return sb.ToString();
 

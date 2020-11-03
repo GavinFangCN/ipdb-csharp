@@ -11,58 +11,65 @@ namespace ipdb
          */
         private readonly Reader reader;
 
-        public IDC(string name)  {
+        public IDC(string name)
+        {
             reader = new Reader(name);
         }
 
-        public string[] find(string addr, string language)  {
-            return reader.find(addr, language);
+        public string[] Find(string addr, string language)
+        {
+            return reader.Find(addr, language);
         }
 
-        public Dictionary<string, string> findMap(string addr, string language)  {
-            var data = reader.find(addr, language);
-            if (data == null) {
+        public Dictionary<string, string> FindMap(string addr, string language)
+        {
+            var data = reader.Find(addr, language);
+            if (data == null)
+            {
                 return null;
             }
 
             var m = new Dictionary<string, string>();
 
-            var fields = reader.getSupportFields();
+            var fields = reader.GetSupportFields();
 
-            for (int i = 0, l = data.Length; i<l; i++) {
+            for (int i = 0, l = data.Length; i < l; i++)
+            {
                 m.Add(fields[i], data[i]);
             }
 
             return m;
         }
 
-        public IDCInfo findInfo(string addr, string language)  {
+        public IDCInfo FindInfo(string addr, string language)
+        {
 
-            var data = reader.find(addr, language);
-            if (data == null) {
+            var data = reader.Find(addr, language);
+            if (data == null)
+            {
                 return null;
             }
             return new IDCInfo(data);
         }
 
-        public bool isIPv4()
+        public bool IsIPv4()
         {
-            return (reader.getMeta().IPVersion & 0x01) == 0x01;
+            return (reader.GetMeta().IPVersion & 0x01) == 0x01;
         }
 
-        public bool isIPv6()
+        public bool IsIPv6()
         {
-            return (reader.getMeta().IPVersion & 0x02) == 0x02;
+            return (reader.GetMeta().IPVersion & 0x02) == 0x02;
         }
 
-        public string[] fields()
+        public string[] Fields()
         {
-            return reader.getSupportFields();
+            return reader.GetSupportFields();
         }
 
-        public int buildTime()
+        public int BuildTime()
         {
-            return reader.getBuildUTCTime();
+            return reader.GetBuildUTCTime();
         }
     }
 }

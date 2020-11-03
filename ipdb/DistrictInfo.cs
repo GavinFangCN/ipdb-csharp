@@ -13,42 +13,42 @@ namespace ipdb
             this.data = data;
         }
 
-        public string getCountryName()
+        public string GetCountryName()
         {
             return data[0];
         }
 
-        public string getRegionName()
+        public string GetRegionName()
         {
             return data[1];
         }
 
-        public string getCityName()
+        public string GetCityName()
         {
             return data[2];
         }
 
-        public string getDistrictName()
+        public string GetDistrictName()
         {
             return data[3];
         }
 
-        public string getChinaAdminCode()
+        public string GetChinaAdminCode()
         {
             return data[4];
         }
 
-        public string getCoveringRadius()
+        public string GetCoveringRadius()
         {
             return data[5];
         }
 
-        public string getLatitude()
+        public string GetLatitude()
         {
             return data[7];
         }
 
-        public string getLongitude()
+        public string GetLongitude()
         {
             return data[6];
         }
@@ -58,28 +58,28 @@ namespace ipdb
             var sb = new StringBuilder();
 
             sb.Append("country_name:");
-            sb.Append(getCountryName());
+            sb.Append(GetCountryName());
             sb.Append("\n");
             sb.Append("region_name:");
-            sb.Append(getRegionName());
+            sb.Append(GetRegionName());
             sb.Append("\n");
             sb.Append("city_name:");
-            sb.Append(getCityName());
+            sb.Append(GetCityName());
             sb.Append("\n");
             sb.Append("district_name:");
-            sb.Append(getDistrictName());
+            sb.Append(GetDistrictName());
             sb.Append("\n");
             sb.Append("china_admin_code:");
-            sb.Append(getChinaAdminCode());
+            sb.Append(GetChinaAdminCode());
             sb.Append("\n");
             sb.Append("covering_radius:");
-            sb.Append(getCoveringRadius());
+            sb.Append(GetCoveringRadius());
             sb.Append("\n");
             sb.Append("latitude:");
-            sb.Append(getLatitude());
+            sb.Append(GetLatitude());
             sb.Append("\n");
             sb.Append("longitude:");
-            sb.Append(getLongitude());
+            sb.Append(GetLongitude());
 
             return sb.ToString();
         }

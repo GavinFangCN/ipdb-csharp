@@ -13,32 +13,32 @@ namespace ipdb
             this.data = data;
         }
 
-        public string getCountryName()
+        public string GetCountryName()
         {
             return data[0];
         }
 
-        public string getRegionName()
+        public string GetRegionName()
         {
             return data[1];
         }
 
-        public string getCityName()
+        public string GetCityName()
         {
             return data[2];
         }
 
-        public string getOwnerDomain()
+        public string GetOwnerDomain()
         {
             return data[3];
         }
 
-        public string getIspDomain()
+        public string GetIspDomain()
         {
             return data[4];
         }
 
-        public string getBaseStation()
+        public string GetBaseStation()
         {
             return data[5];
         }
@@ -48,22 +48,22 @@ namespace ipdb
             var sb = new StringBuilder();
 
             sb.Append("country_name:");
-            sb.Append(getCountryName());
+            sb.Append(GetCountryName());
             sb.Append("\n");
             sb.Append("region_name:");
-            sb.Append(getRegionName());
+            sb.Append(GetRegionName());
             sb.Append("\n");
             sb.Append("city_name:");
-            sb.Append(getCityName());
+            sb.Append(GetCityName());
             sb.Append("\n");
             sb.Append("owner_domain:");
-            sb.Append(getOwnerDomain());
+            sb.Append(GetOwnerDomain());
             sb.Append("\n");
             sb.Append("isp_domain:");
-            sb.Append(getIspDomain());
+            sb.Append(GetIspDomain());
             sb.Append("\n");
             sb.Append("base_station:");
-            sb.Append(getBaseStation());
+            sb.Append(GetBaseStation());
 
             return sb.ToString();
         }

@@ -3,7 +3,7 @@ using System.IO;
 using System.Linq;
 using System.Net;
 using System.Text;
-using Newtonsoft.Json;
+using System.Text.Json;
 
 namespace ipdb
 {
@@ -25,7 +25,7 @@ namespace ipdb
 
             data = File.ReadAllBytes(name);
 
-            var metaLength = bytesToLong(
+            var metaLength = BytesToLong(
                 data[0],
                 data[1],
                 data[2],
@@ -35,12 +35,12 @@ namespace ipdb
             var metaBytes = new byte[metaLength];
             Array.Copy(data, 4, metaBytes, 0, metaLength);
 
-            var meta = JsonConvert.DeserializeObject<MetaData>(Encoding.UTF8.GetString(metaBytes));
+            var meta = JsonSerializer.Deserialize<MetaData>(Encoding.UTF8.GetString(metaBytes));
 
-            nodeCount = meta.nodeCount;
+            nodeCount = meta.NodeCount;
             this.meta = meta;
 
-            if ((meta.totalSize + (int)metaLength + 4) != data.Length)
+            if ((meta.TotalSize + (int)metaLength + 4) != data.Length)
             {
                 throw new InvalidDatabaseException("database file size error");
             }
@@ -54,11 +54,11 @@ namespace ipdb
                 {
                     if (i >= 80)
                     {
-                        node = readNode(node, 1);
+                        node = ReadNode(node, 1);
                     }
                     else
                     {
-                        node = readNode(node, 0);
+                        node = ReadNode(node, 0);
                     }
                 }
 
@@ -66,7 +66,7 @@ namespace ipdb
             }
         }
 
-        public string[] find(string addr, string language)
+        public string[] Find(string addr, string language)
         {
 
             int off;
@@ -122,20 +122,20 @@ namespace ipdb
             int node;
             try
             {
-                node = findNode(ipv);
+                node = FindNode(ipv);
             }
             catch (NotFoundException)
             {
                 return null;
             }
 
-            var data = resolve(node);
+            var data = Resolve(node);
             var dst = new string[meta.Fields.Length];
             Array.Copy(data.Split('\t'), off, dst, 0, meta.Fields.Length);
             return dst;
         }
 
-        private int findNode(byte[] binary)
+        private int FindNode(byte[] binary)
         {
 
             var node = 0;
@@ -154,7 +154,7 @@ namespace ipdb
                     break;
                 }
 
-                node = readNode(node, 1 & ((0xFF & binary[i / 8]) >> 7 - (i % 8)));
+                node = ReadNode(node, 1 & ((0xFF & binary[i / 8]) >> 7 - (i % 8)));
             }
 
             if (node > nodeCount)
@@ -165,7 +165,7 @@ namespace ipdb
             throw new NotFoundException("ip not found");
         }
 
-        private string resolve(int node)
+        private string Resolve(int node)
         {
             var resoloved = node - nodeCount + nodeCount * 8;
             if (resoloved >= fileSize)
@@ -174,7 +174,7 @@ namespace ipdb
             }
 
             byte b = 0;
-            var size = (int)(bytesToLong(
+            var size = (int)(BytesToLong(
                 b,
                 b,
                 data[resoloved],
@@ -189,11 +189,11 @@ namespace ipdb
             return Encoding.UTF8.GetString(data, resoloved + 2, size);
         }
 
-        private int readNode(int node, int index)
+        private int ReadNode(int node, int index)
         {
             var off = node * 8 + index * 4;
 
-            return (int)(bytesToLong(
+            return (int)(BytesToLong(
                 data[off],
                 data[off + 1],
                 data[off + 2],
@@ -201,12 +201,12 @@ namespace ipdb
             ));
         }
 
-        private static long bytesToLong(byte a, byte b, byte c, byte d)
+        private static long BytesToLong(byte a, byte b, byte c, byte d)
         {
-            return int2long((((a & 0xff) << 24) | ((b & 0xff) << 16) | ((c & 0xff) << 8) | (d & 0xff)));
+            return Int2long((((a & 0xff) << 24) | ((b & 0xff) << 16) | ((c & 0xff) << 8) | (d & 0xff)));
         }
 
-        private static long int2long(int i)
+        private static long Int2long(int i)
         {
             var l = i & 0x7fffffffL;
             if (i < 0)
@@ -217,17 +217,17 @@ namespace ipdb
             return l;
         }
 
-        public MetaData getMeta()
+        public MetaData GetMeta()
         {
             return meta;
         }
 
-        public int getBuildUTCTime()
+        public int GetBuildUTCTime()
         {
             return meta.Build;
         }
 
-        public string[] getSupportFields()
+        public string[] GetSupportFields()
         {
             return meta.Fields;
         }
